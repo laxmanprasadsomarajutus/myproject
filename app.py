@@ -33,11 +33,8 @@ else:
     print("Error: Model 2 file not found.")
 
 
-# Initialize session state dictionary
-if "session_state" not in st.session_state:
-    st.session_state["graphs_displayed"] = False
-
-if st.button("Predict It"):
+# Streamlit app starts here
+# ... (Your input fields and UI elements...)
 
 
 
@@ -198,12 +195,8 @@ if device_type == "phones":
 
 # Function to show graphs from specific directories
 def show_graphs(directory_path):
-    # Get the current directory of the app file
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-
-    # Create the full path to the image directory
-    image_dir = os.path.join(current_dir, directory_path)
-
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    image_dir = os.path.join(script_dir, directory_path)
     file_list = os.listdir(image_dir)
 
     if len(file_list) == 0:
@@ -232,10 +225,6 @@ def show_graphs(directory_path):
 
 
 
-
-# Initialize session state dictionary
-if "session_state" not in st.session_state:
-    st.session_state["graphs_displayed"] = False
 
 if st.button("Predict It"):
     if (
@@ -310,31 +299,28 @@ If you would like to view the graphs, click the button below:
 graphs_displayed = False
 
 # Button to view the graphs
-if st.button("View Graphs"):
-    # Toggle the flag when the button is clicked to show/hide graphs
-    st.session_state["graphs_displayed"] = not st.session_state["graphs_displayed"]
-
-# Expander for the graphs
-with st.expander("Graphs", expanded=st.session_state["graphs_displayed"]):
-    if st.session_state["graphs_displayed"]:
-        # Call functions to show the specific graphs for phones
-        st.subheader("Correlation Graphs")
+if not graphs_displayed and st.button("View Graphs"):
+    with st.expander("Correlation Graphs", expanded=True):
         show_graphs("phones/src/plots/correlation")
 
-        st.subheader("Correlation with Success Graphs")
+    with st.expander("Correlation with Success Graphs", expanded=True):
         show_graphs("phones/src/plots/correlationwithsuccess")
 
-        st.subheader("Distributions Graphs")
+    with st.expander("Distributions Graphs", expanded=True):
         show_graphs("phones/src/plots/distributions")
 
-        st.subheader("Success Rate by Category Graphs")
+    with st.expander("Success Rate by Category Graphs", expanded=True):
         show_graphs("phones/src/plots/successratebycategory")
 
-        # Add more calls to show_graphs for other phone graph categories here
+    with st.expander("Success vs Features Graphs", expanded=True):
+        show_graphs("phones/src/plots/successvsfeatures")
+
+    # Set the flag to True to indicate that graphs are displayed
+    graphs_displayed = True
 
 # Add a back button to return to the main UI if graphs are displayed
-if st.session_state["graphs_displayed"] and st.button("Back"):
-    st.session_state["graphs_displayed"] = False
+if graphs_displayed and st.button("Back"):
+    graphs_displayed = False
 
 elif device_type == "laptops":
     st.markdown("<div class='title'>Laptops Success Rate</div>", unsafe_allow_html=True)
