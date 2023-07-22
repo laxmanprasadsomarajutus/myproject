@@ -33,8 +33,11 @@ else:
     print("Error: Model 2 file not found.")
 
 
-# Streamlit app starts here
-# ... (Your input fields and UI elements...)
+# Initialize session state dictionary
+if "session_state" not in st.session_state:
+    st.session_state["graphs_displayed"] = False
+
+if st.button("Predict It"):
 
 
 
@@ -229,6 +232,7 @@ def show_graphs(directory_path):
 
 
 
+
 # Initialize session state dictionary
 if "session_state" not in st.session_state:
     st.session_state["graphs_displayed"] = False
@@ -313,21 +317,20 @@ if st.button("View Graphs"):
 # Expander for the graphs
 with st.expander("Graphs", expanded=st.session_state["graphs_displayed"]):
     if st.session_state["graphs_displayed"]:
-        # Call functions to show the specific graphs
+        # Call functions to show the specific graphs for phones
         st.subheader("Correlation Graphs")
-        show_graphs("F:/an-001-master/phones/src/plots/correlation")
+        show_graphs("phones/src/plots/correlation")
 
         st.subheader("Correlation with Success Graphs")
-        show_graphs("F:/an-001-master/phones/src/plots/correlationwithsuccess")
+        show_graphs("phones/src/plots/correlationwithsuccess")
 
         st.subheader("Distributions Graphs")
-        show_graphs("F:/an-001-master/phones/src/plots/distributions")
+        show_graphs("phones/src/plots/distributions")
 
         st.subheader("Success Rate by Category Graphs")
-        show_graphs("F:/an-001-master/phones/src/plots/successratebycategory")
+        show_graphs("phones/src/plots/successratebycategory")
 
-        st.subheader("Success vs Features Graphs")
-        show_graphs("F:/an-001-master/phones/src/plots/successvsfeatures")
+        # Add more calls to show_graphs for other phone graph categories here
 
 # Add a back button to return to the main UI if graphs are displayed
 if st.session_state["graphs_displayed"] and st.button("Back"):
