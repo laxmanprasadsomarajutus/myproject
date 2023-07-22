@@ -195,8 +195,12 @@ if device_type == "phones":
 
 # Function to show graphs from specific directories
 def show_graphs(directory_path):
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    image_dir = os.path.join(script_dir, directory_path)
+    # Get the current directory of the app file
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+
+    # Create the full path to the image directory
+    image_dir = os.path.join(current_dir, directory_path)
+
     file_list = os.listdir(image_dir)
 
     if len(file_list) == 0:
@@ -222,6 +226,7 @@ def show_graphs(directory_path):
                     idx += 1
                 else:
                     col.empty()  # Create an empty space if there are no more images to display
+
 
 
 # Initialize session state dictionary
