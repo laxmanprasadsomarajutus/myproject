@@ -7,6 +7,7 @@ from PIL import Image
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.metrics import confusion_matrix, classification_report, roc_auc_score
+import urllib.request
 
 
 # Load the random forest model
@@ -285,6 +286,35 @@ if st.button("Predict It"):
         else:
             st.warning("Product will be a failure in current Market")
             # Display prediction result with a pie chart
+
+# Description of the dataset
+st.markdown("""
+The following button allows you to view and download the phone dataset on which the models are trained. 
+Click on the button to download the dataset.
+""")
+
+# Function to load and display the dataset
+def view_dataset():
+    df = pd.read_csv("processed-v2.csv")
+    st.dataframe(df)
+
+
+
+# File upload to load the dataset
+uploaded_file = st.file_uploader("Upload the dataset (processed-v2.csv)", type=["csv"])
+if uploaded_file is not None:
+    df = pd.read_csv(uploaded_file)
+    st.dataframe(df)
+
+# Button to view the dataset
+if st.button("View Dataset by downloading from the github and drop in here"):
+    view_dataset()
+
+# Link to view the dataset on GitHub
+github_link = "https://github.com/laxmanprasadsomarajutus/myproject/blob/main/phones/data/processed-v2.csv"
+if st.button("View Dataset on GitHub"):
+    st.markdown(f"Click [here]({github_link}) to view the dataset on GitHub.")
+
 
 # Create a section for all graphs
 st.subheader("Graphs for Analysis")
