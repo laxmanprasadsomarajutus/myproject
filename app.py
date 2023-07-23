@@ -3,11 +3,13 @@ import pandas as pd
 import numpy as np
 import joblib
 import os
+import webbrowser
 from PIL import Image
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.metrics import confusion_matrix, classification_report, roc_auc_score
 import urllib.request
+
 
 
 # Load the random forest model
@@ -34,8 +36,58 @@ else:
     print("Error: Model 2 file not found.")
 
 
-# Streamlit app starts here
-# ... (Your input fields and UI elements...)
+# Function to open the link in a new tab
+def open_link_in_new_tab(link, text):
+    new_tab_code = f'<a href="{link}" target="_blank" style="font-size: 16px; color: blue;">{text}</a>'
+    st.markdown(new_tab_code, unsafe_allow_html=True)
+
+def show_developer_details():
+    st.markdown(
+        """
+        <div style="border: 1px solid #ccc; padding: 20px; border-radius: 5px; background-image: url('https://media.giphy.com/media/ftAyb0CG1FNAIZt4SO/giphy.gif'); background-size: cover; background-repeat: no-repeat;">
+            <p style="font-size: 20px; font-weight: bold; margin-bottom: 10px; color: green;">Developer Details:</p>
+            <p style="font-size: 18px; color: black;"><b>Name:</b> Somaraju Laxman Prasad</p>
+            <p style="font-size: 18px; color: black;"><b>Study:</b> Masters in Data Analytics Level 9</p>
+        """,
+        unsafe_allow_html=True,
+    )
+    open_link_in_new_tab("https://www.datascienceportfol.io/laxmanprasad", "View More data Projects")
+    open_link_in_new_tab("https://www.linkedin.com/in/laxman-prasad-somaraju-48a397229/", "View LinkedIn")
+    st.markdown("</div>", unsafe_allow_html=True)
+
+
+# Function to display progress information in a rectangle
+def show_progress_info():
+    st.markdown(
+        """
+        <div style="border: 1px solid #ccc; padding: 20px; border-radius: 5px; margin-top: 20px; background-image: url('https://media.giphy.com/media/bGgsc5mWoryfgKBx1u/giphy.gif'); background-size: cover; background-repeat: no-repeat;">
+            <p style="font-size: 21px; font-weight: bold; margin-bottom: 10px; color: red;">Work in Progress:</p>
+            <p style="font-size: 20px; font-weight: bold; color: yellow;">This app is primarily focused on phone analysis. Development for laptops is in progress.</p>
+            <p style="font-size: 19px; font-weight: bold; color: yellow;">Once updated for laptops, all visualizations and modeling info will be available.</p>
+            <p style="font-size: 20px; font-weight: bold; color: yellow;">In the meantime, you can check my GitHub repository for the code and app development progress.</p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+# Set the page background color to black
+st.markdown(
+    """
+    <style>
+    body {
+        background-color: black;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+# Display developer details
+show_developer_details()
+
+# Display progress information
+show_progress_info()
+
 
 
 
@@ -287,6 +339,37 @@ if st.button("Predict It"):
             st.warning("Product will be a failure in current Market")
             # Display prediction result with a pie chart
 
+
+# Define the location of the images
+image_locations = [
+    "./phones/src/models/models_information/best_modelafterandbeforetuning.png",
+    "./phones/src/models/models_information/confusion_matrix_roc_curve.png",
+    "./phones/src/models/models_information/confusionmatrixbeforeaftertuning.png",
+    "./phones/src/models/models_information/cross_validation_score.png",
+    "./phones/src/models/models_information/cross_validation.png",
+    "./phones/src/models/models_information/ensemblemethods.png",
+    "./phones/src/models/models_information/feature_important.png",
+    "./phones/src/models/models_information/hypertuning.png",
+    "./phones/src/models/models_information/output.png",
+    "./phones/src/models/models_information/rocbeforeaftertuning.png",
+    "./phones/src/models/models_information/tetsingaccurcyofensemblemethods.png",
+    "./phones/src/models/models_information/training_and_testing_confusion_matrix.png",
+]
+
+# Description of the visualizations
+st.markdown("""
+This section contains visualizations based on the modeling process. It includes ensemble methods, cross-validation, feature importance, best model before and after tuning, confusion matrix, ROC curve, accuracy of models for testing and training. If you want to view these visualizations, click the button below:
+""")
+            
+# Button to display the images
+if st.button("View Charts for the Dataset After Modeling"):
+    for image_path in image_locations:
+        image = Image.open(image_path)
+        st.image(image, caption=image_path, use_column_width=True)
+    # Add a "Back" button to hide the images
+    if st.button("Back"):
+        pass  # This will not execute any code, effectively hiding the images when clicked on "Back"
+
 # Description of the dataset
 st.markdown("""
 The following button allows you to view and download the phone dataset on which the models are trained. 
@@ -351,6 +434,7 @@ if not graphs_displayed and st.button("View Graphs"):
 # Add a back button to return to the main UI if graphs are displayed
 if graphs_displayed and st.button("Back"):
     graphs_displayed = False
+
 
 elif device_type == "laptops":
     st.markdown("<div class='title'>Laptops Success Rate</div>", unsafe_allow_html=True)
