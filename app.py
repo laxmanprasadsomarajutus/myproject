@@ -279,7 +279,8 @@ def show_graphs(directory_path):
 
 
 
-if st.button("Predict It"):
+# Button to predict the device success rate for phones
+if st.button("Predict It - Phones", key="predict_phones"):
     if (
         mrp <= 0
         or ram <= 0
@@ -336,105 +337,8 @@ if st.button("Predict It"):
         if prediction[0]:
             st.success("Product should be a success in the current Market")
         else:
-            st.warning("Product will be a failure in current Market")
+            st.warning("Product will be a failure in the current Market")
             # Display prediction result with a pie chart
-
-
-# Define the location of the images
-image_locations = [
-    "./phones/src/models/models_information/best_modelafterandbeforetuning.png",
-    "./phones/src/models/models_information/confusion_matrix_roc_curve.png",
-    "./phones/src/models/models_information/confusionmatrixbeforeaftertuning.png",
-    "./phones/src/models/models_information/cross_validation_score.png",
-    "./phones/src/models/models_information/cross_validation.png",
-    "./phones/src/models/models_information/ensemblemethods.png",
-    "./phones/src/models/models_information/feature_important.png",
-    "./phones/src/models/models_information/hypertuning.png",
-    "./phones/src/models/models_information/output.png",
-    "./phones/src/models/models_information/rocbeforeaftertuning.png",
-    "./phones/src/models/models_information/tetsingaccurcyofensemblemethods.png",
-    "./phones/src/models/models_information/training_and_testing_confusion_matrix.png",
-]
-
-# Description of the visualizations
-st.markdown("""
-This section contains visualizations based on the modeling process. It includes ensemble methods, cross-validation, feature importance, best model before and after tuning, confusion matrix, ROC curve, accuracy of models for testing and training. If you want to view these visualizations, click the button below:
-""")
-            
-# Button to display the images
-if st.button("View Charts for the Dataset After Modeling"):
-    for image_path in image_locations:
-        image = Image.open(image_path)
-        st.image(image, caption=image_path, use_column_width=True)
-    # Add a "Back" button to hide the images
-    if st.button("Back"):
-        pass  # This will not execute any code, effectively hiding the images when clicked on "Back"
-
-# Description of the dataset
-st.markdown("""
-The following button allows you to view and download the phone dataset on which the models are trained. 
-Click on the button to download the dataset.
-""")
-
-# Function to load and display the dataset
-def view_dataset():
-    df = pd.read_csv("processed-v2.csv")
-    st.dataframe(df)
-
-
-
-# File upload to load the dataset
-uploaded_file = st.file_uploader("Upload the dataset (processed-v2.csv)", type=["csv"])
-if uploaded_file is not None:
-    df = pd.read_csv(uploaded_file)
-    st.dataframe(df)
-
-# Button to view the dataset
-if st.button("View Dataset by downloading from the github and drop in here"):
-    view_dataset()
-
-# Link to view the dataset on GitHub
-github_link = "https://github.com/laxmanprasadsomarajutus/myproject/blob/main/phones/data/processed-v2.csv"
-if st.button("View Dataset on GitHub"):
-    st.markdown(f"Click [here]({github_link}) to view the dataset on GitHub.")
-
-
-# Create a section for all graphs
-st.subheader("Graphs for Analysis")
-
-# Description of the graphs
-st.markdown("""
-This section contains graphs that have been generated based on the designed, tested, and training data. 
-If you would like to view the graphs, click the button below:
-""")
-            
-# Define a flag variable to track if graphs are being displayed
-graphs_displayed = False
-
-# Button to view the graphs
-if not graphs_displayed and st.button("View Graphs"):
-    with st.expander("Correlation Graphs", expanded=True):
-        show_graphs("phones/src/plots/correlation")
-
-    with st.expander("Correlation with Success Graphs", expanded=True):
-        show_graphs("phones/src/plots/correlationwithsuccess")
-
-    with st.expander("Distributions Graphs", expanded=True):
-        show_graphs("phones/src/plots/distributions")
-
-    with st.expander("Success Rate by Category Graphs", expanded=True):
-        show_graphs("phones/src/plots/successratebycategory")
-
-    with st.expander("Success vs Features Graphs", expanded=True):
-        show_graphs("phones/src/plots/successvsfeatures")
-
-    # Set the flag to True to indicate that graphs are displayed
-    graphs_displayed = True
-
-# Add a back button to return to the main UI if graphs are displayed
-if graphs_displayed and st.button("Back"):
-    graphs_displayed = False
-
 
 elif device_type == "laptops":
     st.markdown("<div class='title'>Laptops Success Rate</div>", unsafe_allow_html=True)
@@ -551,64 +455,159 @@ elif device_type == "laptops":
         battery_type_e.keys(),
     )
 
-    if st.button("Predict It"):
-        if (
-            mrp <= 0
-            or ram_memory <= 0
-            # or phone_warranty <= 0
-            or processor_count <= 0
-            or length <= 0
-            or width <= 0
-            or height <= 0
-            or weight <= 0
-            or screen_res_w <= 0
-            or screen_res_h < 0
-            or hard_drive_size <= 0
-        ):
-            st.error(
-                "Invalid input. Please ensure all numeric values are greater than zero."
-            )
-        elif "" in [
-            os,
-            hard_disk_type,
-            processor_brand,
-            display_type,
-            form_factor,
-            hard_drive_unit,
-            battery_type,
-        ]:
-            st.error("Invalid input. Please Select a valid Value for the Select Fields")
+# Button to predict the device success rate for laptops
+if st.button("Predict It - Laptops", key="predict_laptops"):
+    if (
+        mrp <= 0
+        or ram_memory <= 0
+        # or phone_warranty <= 0
+        or processor_count <= 0
+        or length <= 0
+        or width <= 0
+        or height <= 0
+        or weight <= 0
+        or screen_res_w <= 0
+        or screen_res_h < 0
+        or hard_drive_size <= 0
+    ):
+        st.error("Invalid input. Please ensure all numeric values are greater than zero.")
+    elif "" in [
+        os,
+        hard_disk_type,
+        processor_brand,
+        display_type,
+        form_factor,
+        hard_drive_unit,
+        battery_type,
+    ]:
+        st.error("Invalid input. Please Select a valid Value for the Select Fields")
+    else:
+        # Prepare the data for prediction
+        try:
+            data = [
+                mrp,
+                os_e[os],
+                hard_disk_type_e[hard_disk_type],
+                ram_memory,
+                processor_brand_e[processor_brand],
+                processor_count,
+                display_type_e[display_type],
+                form_factor_e[form_factor],
+                screen_res_w,
+                screen_res_h,
+                length,
+                width,
+                height,
+                weight,
+                hard_drive_size,
+                hard_drive_size_unit_e[hard_drive_unit],
+                battery_type_e[battery_type],
+            ]
+        except KeyError:
+            st.error("Contact Dev as there is an issue with the code")
         else:
-            # Prepare the data for prediction
-            try:
-                data = [
-                    mrp,
-                    os_e[os],
-                    hard_disk_type_e[hard_disk_type],
-                    ram_memory,
-                    processor_brand_e[processor_brand],
-                    processor_count,
-                    display_type_e[display_type],
-                    form_factor_e[form_factor],
-                    screen_res_w,
-                    screen_res_h,
-                    length,
-                    width,
-                    height,
-                    weight,
-                    hard_drive_size,
-                    hard_drive_size_unit_e[hard_drive_unit],
-                    battery_type_e[battery_type],
-                ]
-            except KeyError:
-                st.error("Contact Dev as there is issue with code")
-            else:
-                # Convert the data to numpy array and reshape it
-                data = np.array(data).reshape(1, -1)
+            # Convert the data to numpy array and reshape it
+            data = np.array(data).reshape(1, -1)
 
-                # Make prediction
-                prediction = model_2.predict(data)
-                if prediction is True:
-                    st.success(f"Product should be a success in the current Market")
-                else:
-                    st.warning(f"Product will be a failure in current Market")
+            # Make prediction using model_2
+            prediction = model_2.predict(data)
+            if prediction is True:
+                st.success("Product should be a success in the current Market")
+            else:
+                st.warning("Product will be a failure in the current Market")
+
+
+# Define the location of the images
+image_locations = [
+    "./phones/src/models/models_information/best_modelafterandbeforetuning.png",
+    "./phones/src/models/models_information/confusion_matrix_roc_curve.png",
+    "./phones/src/models/models_information/confusionmatrixbeforeaftertuning.png",
+    "./phones/src/models/models_information/cross_validation_score.png",
+    "./phones/src/models/models_information/cross_validation.png",
+    "./phones/src/models/models_information/ensemblemethods.png",
+    "./phones/src/models/models_information/feature_important.png",
+    "./phones/src/models/models_information/hypertuning.png",
+    "./phones/src/models/models_information/output.png",
+    "./phones/src/models/models_information/rocbeforeaftertuning.png",
+    "./phones/src/models/models_information/tetsingaccurcyofensemblemethods.png",
+    "./phones/src/models/models_information/training_and_testing_confusion_matrix.png",
+]
+
+# Description of the visualizations
+st.markdown("""
+This section contains visualizations based on the modeling process for Phones. It includes ensemble methods, cross-validation, feature importance, best model before and after tuning, confusion matrix, ROC curve, accuracy of models for testing and training. If you want to view these visualizations, click the button below:
+""")
+            
+# Button to display the images
+if st.button("View Charts for the Phone Dataset After Modeling"):
+    for image_path in image_locations:
+        image = Image.open(image_path)
+        st.image(image, caption=image_path, use_column_width=True)
+    # Add a "Back" button to hide the images
+    if st.button("Back"):
+        pass  # This will not execute any code, effectively hiding the images when clicked on "Back"
+
+# Description of the dataset
+st.markdown("""
+The following button allows you to view and download the phone dataset on which the models are trained. 
+Click on the button to download the dataset.
+""")
+
+# Function to load and display the dataset
+def view_dataset():
+    df = pd.read_csv("processed-v2.csv")
+    st.dataframe(df)
+
+
+
+# File upload to load the dataset
+uploaded_file = st.file_uploader("Upload the dataset (processed-v2.csv)", type=["csv"])
+if uploaded_file is not None:
+    df = pd.read_csv(uploaded_file)
+    st.dataframe(df)
+
+# Button to view the dataset
+if st.button("View Phone Dataset by downloading from the github and drop in here"):
+    view_dataset()
+
+# Link to view the dataset on GitHub
+github_link = "https://github.com/laxmanprasadsomarajutus/myproject/blob/main/phones/data/processed-v2.csv"
+if st.button("View Phone Dataset on GitHub"):
+    st.markdown(f"Click [here]({github_link}) to view the dataset on GitHub.")
+
+
+# Create a section for all graphs
+st.subheader("Graphs for Analysis(Phones)")
+
+# Description of the graphs
+st.markdown("""
+This section contains graphs that have been generated based on the designed, tested, and training data. 
+If you would like to view the graphs, click the button below:
+""")
+            
+# Define a flag variable to track if graphs are being displayed
+graphs_displayed = False
+
+# Button to view the graphs
+if not graphs_displayed and st.button("View Graphs"):
+    with st.expander("Correlation Graphs", expanded=True):
+        show_graphs("phones/src/plots/correlation")
+
+    with st.expander("Correlation with Success Graphs", expanded=True):
+        show_graphs("phones/src/plots/correlationwithsuccess")
+
+    with st.expander("Distributions Graphs", expanded=True):
+        show_graphs("phones/src/plots/distributions")
+
+    with st.expander("Success Rate by Category Graphs", expanded=True):
+        show_graphs("phones/src/plots/successratebycategory")
+
+    with st.expander("Success vs Features Graphs", expanded=True):
+        show_graphs("phones/src/plots/successvsfeatures")
+
+    # Set the flag to True to indicate that graphs are displayed
+    graphs_displayed = True
+
+# Add a back button to return to the main UI if graphs are displayed
+if graphs_displayed and st.button("Back"):
+    graphs_displayed = False
