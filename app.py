@@ -44,7 +44,7 @@ def open_link_in_new_tab(link, text):
 def show_developer_details():
     st.markdown(
         """
-        <div style="border: 1px solid #ccc; padding: 20px; border-radius: 5px; background-image: url('https://media.giphy.com/media/ftAyb0CG1FNAIZt4SO/giphy.gif'); background-size: cover; background-repeat: no-repeat;">
+        <div style="border: 1px solid #ccc; padding: 20px; border-radius: 5px; background-image: url('https://giphy.com/gifs/visuals-network-connectivity-7VzgMsB6FLCilwS30v/giphy.gif'); background-size: cover; background-repeat: no-repeat;">
             <p style="font-size: 20px; font-weight: bold; margin-bottom: 10px; color: green;">Developer Details:</p>
             <p style="font-size: 18px; color: black;"><b>Name:</b> Somaraju Laxman Prasad</p>
             <p style="font-size: 18px; color: black;"><b>Study:</b> Masters in Data Analytics Level 9</p>
