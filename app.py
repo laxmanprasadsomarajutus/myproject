@@ -45,9 +45,9 @@ def show_developer_details():
     st.markdown(
         """
         <div style="border: 1px solid #ccc; padding: 20px; border-radius: 5px; background-image: url('https://media.giphy.com/media/7VzgMsB6FLCilwS30v/giphy.gif'); background-size: cover; background-repeat: no-repeat;">
-            <p style="font-size: 20px; font-weight: bold; margin-bottom: 10px; color: green;">Developer Details:</p>
-            <p style="font-size: 18px; color: black;"><b>Name:</b> Somaraju Laxman Prasad</p>
-            <p style="font-size: 18px; color: black;"><b>Study:</b> Masters in Data Analytics Level 9</p>
+            <p style="font-size: 20px; font-weight: bold; margin-bottom: 10px; color: white;">Developer Details:</p>
+            <p style="font-size: 18px; color: white;"><b>Name:</b> Somaraju Laxman Prasad</p>
+            <p style="font-size: 18px; color: white;"><b>Study:</b> Masters in Data Analytics Level 9</p>
         """,
         unsafe_allow_html=True,
     )
