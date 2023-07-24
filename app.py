@@ -61,10 +61,9 @@ def show_progress_info():
     st.markdown(
         """
         <div style="border: 1px solid #ccc; padding: 20px; border-radius: 5px; margin-top: 20px; background-image: url('https://media.giphy.com/media/bGgsc5mWoryfgKBx1u/giphy.gif'); background-size: cover; background-repeat: no-repeat;">
-            <p style="font-size: 21px; font-weight: bold; margin-bottom: 10px; color: red;">Work in Progress:</p>
-            <p style="font-size: 20px; font-weight: bold; color: yellow;">This app is primarily focused on phone analysis. Development for laptops is in progress.</p>
-            <p style="font-size: 19px; font-weight: bold; color: yellow;">Once updated for laptops, all visualizations and modeling info will be available.</p>
-            <p style="font-size: 20px; font-weight: bold; color: yellow;">In the meantime, you can check my GitHub repository for the code and app development progress.</p>
+            <p style="font-size: 21px; font-weight: bold; margin-bottom: 10px; color: red;">Note:</p>
+            <p style="font-size: 20px; font-weight: bold; color: yellow;">Please note that our app's success prediction for smartphones and laptops is based solely on historical data and machine learning algorithms. While we strive to provide valuable insights into the likelihood of success in the market, it's important to understand that the predictions do not take into account all marketing strategies, external influences, or real-time market dynamics. The app serves as an informative tool to aid in decision-making by analyzing past patterns, but actual market outcomes may be influenced by a wide range of factors beyond the scope of the model. Users should consider the predictions as one aspect of their overall strategy and complement them with comprehensive market research and marketing ideas to maximize their products' chances of success.</p>
+            <p style="font-size: 20px; font-weight: bold; color: yellow;">you can check my GitHub repository for the code and app development progress.</p>
         </div>
         """,
         unsafe_allow_html=True,
