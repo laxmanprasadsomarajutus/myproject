@@ -611,3 +611,27 @@ if not graphs_displayed and st.button("View Graphs"):
 # Add a back button to return to the main UI if graphs are displayed
 if graphs_displayed and st.button("Back"):
     graphs_displayed = False
+# Button to display the information about the app and modeling
+if st.button("About the App and Modeling"):
+    st.markdown(
+        """
+        **About the App and Modeling:**
+
+        Our app leverages the power of machine learning to predict the potential success of smartphones in the market. Using a trained Random Forest model, the app takes smartphone features as input and provides users with insights into the likelihood of success in the market.
+
+        **Smartphone Success Prediction:**
+        - **Input:** Users can input various smartphone attributes, including 'mrp', 'ram', 'inbuilt_storage', 'weight', 'battery_power', 'battery_type', 'form_factor', 'length', 'width', 'height', 'os_name', 'os_version', 'phone_warranty (months)', 'camera_count', 'cam_has_AI', 'cam_has_OIS', 'cam_has_Zoom', 'cam_has_HDR', 'cam_has_Macro', and 'cam_has_Portrait'.
+        - **Prediction:** Our trained Random Forest model uses the provided features to make predictions on the potential success of the smartphone. The prediction result will indicate whether the smartphone is likely to be successful or not in the market.
+
+        **Insights for Decision Making:**
+        - The app offers valuable insights into the importance of different smartphone features in determining success. Users can identify key factors that positively or negatively impact the predicted success of their smartphones.
+        - Please note that the predictions are based on historical patterns observed in the training data and are meant to be informative. Actual market outcomes may be influenced by various external factors beyond the scope of the model.
+
+        **Modeling Approach:**
+        - The Random Forest model used in the app was trained on a diverse and representative dataset, consisting of various smartphone features and their corresponding market outcomes.
+        - Feature engineering techniques were employed to create relevant features like 'avg_rating' and 'percentage' success metrics, contributing to the accuracy of the model's predictions.
+        - The selection of thresholds and weightages for the success metric was iteratively fine-tuned to achieve a balanced representation of smartphone success factors. While the initial values were randomly assigned, the refinement process involved trial and error and exploratory data analysis.
+
+        By combining the power of machine learning and feature engineering, our app aims to assist users in making informed decisions when designing and marketing their smartphones, ultimately enhancing their chances of success in the competitive market.
+        """
+    )
