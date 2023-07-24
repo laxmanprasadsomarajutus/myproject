@@ -84,8 +84,7 @@ st.markdown(
 # Display developer details
 show_developer_details()
 
-# Display progress information
-show_progress_info()
+
 
 
 
@@ -658,4 +657,5 @@ if st.button("About the App and Modeling(laptop)"):    # Displaying the descript
     By leveraging the power of machine learning and feature engineering, our app aims to empower users in making informed decisions when designing, manufacturing, and marketing their laptops. We believe that these insights will enhance their chances of achieving success in the dynamic and competitive laptop market.
     """
 )
-
+# Display progress information
+show_progress_info()
