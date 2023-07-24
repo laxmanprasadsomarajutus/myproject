@@ -635,3 +635,27 @@ if st.button("About the App and Modeling"):
         By combining the power of machine learning and feature engineering, our app aims to assist users in making informed decisions when designing and marketing their smartphones, ultimately enhancing their chances of success in the competitive market.
         """
     )
+    # Displaying the description for Laptop section
+st.markdown(
+    """
+    **About the App and Modeling (Laptop):**
+
+    Our app goes beyond predicting smartphone success; it also extends its capabilities to classify the potential success of laptops in the market. Powered by advanced machine learning techniques, our app takes laptop features as input and provides users with valuable insights into the likelihood of success in the competitive laptop market.
+
+    **Laptop Success Classification:**
+    - **Input:** Users can input a range of laptop specifications, including 'mrp', 'os', 'hard_disk_type', 'ram_memory', 'processor_brand', 'processor_count', 'display_type', 'form_factor', 'no of 5 star', 'no of 4 star', 'no of 3 star', 'no of 2 star', 'no of 1 star', 'screen_res_w', 'screen_res_h', 'length', 'width', 'height', 'weight', 'hard_drive_size_value', 'hard_drive_size_unit', and 'battery_type'.
+    - **Prediction:** Utilizing a carefully trained Random Forest model, the app analyzes the provided laptop features to predict its potential success in the market. The prediction result will indicate whether the laptop is likely to be successful or not.
+
+    **Insights for Decision Making:**
+    - Our app doesn't stop at just providing predictions. It offers valuable insights into the significance of different laptop features in determining success. Users can identify key factors that positively or negatively impact the predicted success of their laptops.
+    - Please note that the predictions are based on historical patterns observed in the training data and serve as informative guidelines. The actual market performance of laptops may be influenced by a multitude of external factors beyond the scope of the model.
+
+    **Modeling Approach:**
+    - Similar to the smartphone success prediction, our Random Forest model for laptops was trained on a diverse and representative dataset. This dataset contains a wide array of laptop features and their corresponding market outcomes, ensuring the model's ability to generalize to various laptop models.
+    - Feature engineering techniques were applied to extract relevant features, such as 'avg_rating' and 'percentage' success metrics, further contributing to the model's accuracy in predicting laptop success.
+    - The determination of thresholds and weightages for the success metric followed an iterative fine-tuning process. The initial values were randomly assigned, but through meticulous trial and error and exploratory data analysis, we arrived at refined values for a well-balanced representation of laptop success factors.
+
+    By leveraging the power of machine learning and feature engineering, our app aims to empower users in making informed decisions when designing, manufacturing, and marketing their laptops. We believe that these insights will enhance their chances of achieving success in the dynamic and competitive laptop market.
+    """
+)
+
