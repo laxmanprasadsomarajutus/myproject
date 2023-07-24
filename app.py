@@ -635,8 +635,9 @@ if st.button("About the App and Modeling"):
         By combining the power of machine learning and feature engineering, our app aims to assist users in making informed decisions when designing and marketing their smartphones, ultimately enhancing their chances of success in the competitive market.
         """
     )
-    # Displaying the description for Laptop section
-st.markdown(
+
+if st.button("About the App and Modeling(laptop)"):    # Displaying the description for Laptop section
+    st.markdown(
     """
     **About the App and Modeling (Laptop):**
 
