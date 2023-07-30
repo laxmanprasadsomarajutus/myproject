@@ -38,7 +38,7 @@ else:
 
 # Function to open the link in a new tab
 def open_link_in_new_tab(link, text):
-    new_tab_code = f'<a href="{link}" target="_blank" style="font-size: 16px; color: blue;">{text}</a>'
+    new_tab_code = f'<a href="{link}" target="_blank" style="font-size: 16px; color: white;">{text}</a>'
     st.markdown(new_tab_code, unsafe_allow_html=True)
 
 def show_developer_details():
