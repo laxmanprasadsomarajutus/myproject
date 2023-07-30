@@ -13,7 +13,7 @@ import urllib.request
 
 
 # Load the random forest model
-model_path_1 = "./phones/src/models/best_model.joblib"
+model_path_1 = "./phones/src/models/best_model1.joblib"
 model_1 = joblib.load(model_path_1)
 
 model_path_2 = "./laptops/models/random_forest.joblib"
